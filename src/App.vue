@@ -15,22 +15,26 @@ export default {
     };
   },
   methods: {
-    testApiCall() {
-      const testUrl = store.movieUrl + store.queryMovie;
+    getMovies() {
+      const fullUrl = store.movieUrl + store.queryMovie;
+      let temp = store.queryMovie.split(" ");
+      temp = temp.join("+");
+      store.queryMovie = temp;
 
-      axios.get(testUrl).then((res) => {
+      axios.get(fullUrl).then((res) => {
         store.movieResArr = res.data.results;
+        console.log(store.movieResArr);
       });
     },
   },
   mounted() {
-    this.testApiCall();
+    this.getMovies();
   },
 };
 </script>
 
 <template>
-  <AppHeader />
+  <AppHeader @searchInMovies="getMovies" />
   <main>
     <AppMain />
   </main>

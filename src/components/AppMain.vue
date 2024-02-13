@@ -16,7 +16,11 @@ export default {
 <template>
   <div class="container">
     <div class="cards">
-      <CardComp v-for="(movie, index) in store.movieResArr" />
+      <CardComp
+        v-for="(movie, index) in store.movieResArr"
+        :key="index"
+        :propsMovies="movie"
+      />
     </div>
   </div>
 </template>
@@ -31,6 +35,7 @@ export default {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
+    justify-content: center;
   }
 }
 </style>

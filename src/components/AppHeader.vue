@@ -1,6 +1,12 @@
 <script>
+import { store } from "../store";
 export default {
   name: "AppHeader",
+  data() {
+    return {
+      store,
+    };
+  },
 };
 </script>
 <template>
@@ -14,8 +20,12 @@ export default {
         </ul>
       </div>
       <div class="search-field">
-        <input type="text" placeholder="search for..." />
-        <button>Search</button>
+        <input
+          v-model="store.queryMovie"
+          type="text"
+          placeholder="search for..."
+        />
+        <button @click="$emit('searchInMovies')">Search</button>
       </div>
     </nav>
   </header>
