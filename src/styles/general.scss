@@ -6,4 +6,19 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+  height: 100vh;
+  background-color: #121212;
+  color: #fff;
+}
+
+main {
+  height: calc(100% - 80px);
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style-type: none;
 }
