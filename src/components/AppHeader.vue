@@ -14,7 +14,7 @@ export default {
         </ul>
       </div>
       <div class="search-field">
-        <input type="text" placeholder="search..." />
+        <input type="text" placeholder="search for..." />
         <button>Search</button>
       </div>
     </nav>
@@ -65,11 +65,11 @@ header {
       width: 30%;
       input {
         padding: 0.5rem;
-        width: 50%;
+        min-width: 85px;
       }
       button {
         padding: 8px;
-        width: 15%;
+
         background-color: #2a2929;
         color: #fff;
         cursor: pointer;
