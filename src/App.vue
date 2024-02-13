@@ -16,20 +16,20 @@ export default {
   },
   methods: {
     getMovies() {
-      const fullUrl = store.movieUrl + store.queryMovie;
       let temp = store.queryMovie.split(" ");
       temp = temp.join("+");
       store.queryMovie = temp;
 
+      const fullUrl = store.movieUrl + store.queryMovie;
+      console.log(fullUrl);
       axios.get(fullUrl).then((res) => {
         store.movieResArr = res.data.results;
-        console.log(store.movieResArr);
       });
+
+      console.log(store.movieResArr);
     },
   },
-  mounted() {
-    this.getMovies();
-  },
+  mounted() {},
 };
 </script>
 

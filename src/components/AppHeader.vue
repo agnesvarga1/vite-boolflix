@@ -24,6 +24,7 @@ export default {
           v-model="store.queryMovie"
           type="text"
           placeholder="search for..."
+          required
         />
         <button @click="$emit('searchInMovies')">Search</button>
       </div>

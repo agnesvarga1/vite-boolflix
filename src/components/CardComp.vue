@@ -14,15 +14,12 @@ export default {
   <div class="card">
     <div class="card-top">
       <figure>
-        <img
-          src="https://image.tmdb.org/t/p/w500/qhb1qOilapbapxWQn9jtRCMwXJF.jpg"
-          alt=""
-        />
+        <img :src="store.urlImg + propsMovies.poster_path" alt="" />
       </figure>
     </div>
     <div class="card-bottom">
-      <span>Title:{{ propsMovies.title }}</span>
-      <span>Title:{{ propsMovies.original_title }}</span>
+      <span>{{ propsMovies.title }}</span>
+      <span>Original Title: {{ propsMovies.original_title }}</span>
       <span>Language:{{ propsMovies.original_language }}</span>
       <span>Vote:{{ propsMovies.vote_average }}</span>
     </div>
