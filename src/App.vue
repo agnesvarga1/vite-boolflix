@@ -15,6 +15,12 @@ export default {
     };
   },
   methods: {
+    trendingAll() {
+      axios.get(store.urlAll).then((res) => {
+        console.log(res.data.results);
+        store.allTrending = res.data.results;
+      });
+    },
     getMovies() {
       let temp = store.queryMovie.split(" ");
       temp = temp.join("+");
@@ -29,7 +35,9 @@ export default {
       console.log(store.movieResArr);
     },
   },
-  mounted() {},
+  mounted() {
+    this.trendingAll();
+  },
 };
 </script>
 

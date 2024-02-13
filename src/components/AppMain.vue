@@ -17,7 +17,9 @@ export default {
   <div class="container">
     <div class="cards">
       <CardComp
-        v-for="(movie, index) in store.movieResArr"
+        v-for="(movie, index) in store.queryMovie == ``
+          ? store.allTrending
+          : store.movieResArr"
         :key="index"
         :propsMovies="movie"
       />
@@ -29,7 +31,7 @@ export default {
   width: 80%;
   margin: 0 auto;
   height: 100%;
-  overflow-y: auto;
+
   padding: 1rem;
   .cards {
     display: flex;

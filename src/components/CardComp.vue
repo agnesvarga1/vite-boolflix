@@ -27,7 +27,7 @@ export default {
 </template>
 <style lang="scss" scoped>
 .card {
-  width: 20%;
+  width: 15%;
   display: flex;
   flex-direction: column;
   .card-top {
@@ -43,6 +43,7 @@ export default {
     flex-direction: column;
     gap: 5px;
     font-size: 14px;
+    padding-block: 0.4rem;
   }
 }
 </style>
