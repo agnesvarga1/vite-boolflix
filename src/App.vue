@@ -15,42 +15,52 @@ export default {
     };
   },
   methods: {
-    setUpquery() {
-      let temp = store.queryMovie.split(" ");
-      temp = temp.join("+");
-      store.queryMovie = temp;
-      return store.queryMovie;
+    emptyArr() {
+      store.queryMovie = "";
+      store.movieResArr = [];
+      store.seriesArr = [];
     },
     setLang(arr) {
       arr.forEach((item) => {
         item.original_language === "en" ? (item.original_language = "US") : 0;
         item.original_language === "ja" ? (item.original_language = "JP") : 0;
+        item.original_language === "ko" ? (item.original_language = "KR") : 0;
       });
     },
+
     trendingAll() {
       axios.get(store.urlAll).then((res) => {
-        // console.log(res.data.results);
         store.allTrending = res.data.results;
         this.setLang(store.allTrending);
       });
     },
     getMovies() {
       store.loading = true;
-      const fullUrl = store.movieUrl + this.setUpquery();
-      console.log(fullUrl);
-      axios.get(fullUrl).then((res) => {
+      store.movieResArr = [];
+      const optionsPerAxios = {
+        params: {
+          query: store.queryMovie,
+          api_key: store.myKey,
+          adult: "false",
+        },
+      };
+      axios.get(store.movieUrl, optionsPerAxios).then((res) => {
         store.movieResArr = res.data.results;
         this.setLang(store.movieResArr);
         store.loading = false;
       });
-      store.loading = false ? (store.movieResArr = []) : 0;
     },
     getSeries() {
-      store.seriesArr = [];
       store.loading = true;
-      const fullUrl = store.seriesUrl + this.setUpquery();
-      console.log(fullUrl);
-      axios.get(fullUrl).then((res) => {
+      store.seriesArr = [];
+      const optionsPerAxios = {
+        params: {
+          query: store.queryMovie,
+          api_key: store.myKey,
+          adult: "false",
+        },
+      };
+      axios.get(store.seriesUrl, optionsPerAxios).then((res) => {
         store.seriesArr = res.data.results;
         this.setLang(store.seriesArr);
         store.loading = false;
@@ -68,7 +78,7 @@ export default {
 </script>
 
 <template>
-  <AppHeader @search="searchAll" />
+  <AppHeader @search="searchAll" @clx="emptyArr" @sub="searchAll" />
   <main>
     <AppMain />
   </main>

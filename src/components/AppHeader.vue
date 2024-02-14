@@ -21,10 +21,11 @@ export default {
       </div>
       <div class="search-field">
         <input
+          @keyup.delete="$emit('clx')"
+          @keyup.enter="$emit('sub')"
           v-model="store.queryMovie"
           type="text"
           placeholder="search for..."
-          required
         />
         <button @click="$emit('search')">Search</button>
       </div>
