@@ -15,7 +15,8 @@ export default {
 </script>
 <template>
   <div class="container">
-    <h2>Films</h2>
+    <h2 v-if="store.queryMovie !== ''">Films</h2>
+    <h2 v-else>Trending Now</h2>
     <div class="cards">
       <CardComp
         v-for="(movie, index) in store.queryMovie == ``
@@ -25,12 +26,11 @@ export default {
         :propsMovies="movie"
       />
     </div>
-    <h2>TV Series</h2>
+    <h2 v-if="store.queryMovie !== ''">TV Series</h2>
     <div class="cards">
       <CardComp
-        v-for="(serie, index) in store.queryMovie == ``
-          ? store.allTrending
-          : store.seriesArr"
+        v-if="store.queryMovie !== ''"
+        v-for="(serie, index) in store.seriesArr"
         :key="index"
         :propsMovies="serie"
       />

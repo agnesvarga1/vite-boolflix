@@ -23,9 +23,15 @@ export default {
         >Original Title:
         {{ propsMovies.original_title || propsMovies.original_name }}</span
       >
-      <span id="lan"
-        >Language:{{ propsMovies.original_language.toUpperCase() }}
-        <img :src="store.urlFlag1 + 'US' + store.urlFlag2" />
+      <span id="lang"
+        >Language:
+        <img
+          :src="
+            store.urlFlag1 +
+            propsMovies.original_language.toUpperCase() +
+            store.urlFlag2
+          "
+        />
       </span>
       <span>Ratings:{{ propsMovies.vote_average }}</span>
     </div>
@@ -50,6 +56,10 @@ export default {
     gap: 5px;
     font-size: 14px;
     padding-block: 0.4rem;
+    #lang {
+      display: flex;
+      gap: 0.2rem;
+    }
   }
 }
 </style>
