@@ -15,6 +15,7 @@ export default {
 </script>
 <template>
   <div class="container">
+    <h2>Films</h2>
     <div class="cards">
       <CardComp
         v-for="(movie, index) in store.queryMovie == ``
@@ -24,6 +25,16 @@ export default {
         :propsMovies="movie"
       />
     </div>
+    <h2>TV Series</h2>
+    <div class="cards">
+      <CardComp
+        v-for="(serie, index) in store.queryMovie == ``
+          ? store.allTrending
+          : store.seriesArr"
+        :key="index"
+        :propsMovies="serie"
+      />
+    </div>
   </div>
 </template>
 <style lang="scss" scoped>
@@ -31,13 +42,13 @@ export default {
   width: 80%;
   margin: 0 auto;
   height: 100%;
-
-  padding: 1rem;
+  h2 {
+    margin-block: 1rem;
+  }
   .cards {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
-    justify-content: center;
   }
 }
 </style>

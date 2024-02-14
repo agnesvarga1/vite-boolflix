@@ -26,7 +26,7 @@ export default {
           placeholder="search for..."
           required
         />
-        <button @click="$emit('searchInMovies')">Search</button>
+        <button @click="$emit('search')">Search</button>
       </div>
     </nav>
   </header>

@@ -15,6 +15,12 @@ export default {
     };
   },
   methods: {
+    setUpquery() {
+      let temp = store.queryMovie.split(" ");
+      temp = temp.join("+");
+      store.queryMovie = temp;
+      return store.queryMovie;
+    },
     trendingAll() {
       axios.get(store.urlAll).then((res) => {
         console.log(res.data.results);
@@ -22,17 +28,28 @@ export default {
       });
     },
     getMovies() {
-      let temp = store.queryMovie.split(" ");
-      temp = temp.join("+");
-      store.queryMovie = temp;
-
-      const fullUrl = store.movieUrl + store.queryMovie;
+      store.loading = true;
+      const fullUrl = store.movieUrl + this.setUpquery();
       console.log(fullUrl);
       axios.get(fullUrl).then((res) => {
         store.movieResArr = res.data.results;
+        store.loading = false;
       });
-
-      console.log(store.movieResArr);
+      store.loading = false ? (store.movieResArr = []) : 0;
+    },
+    getSeries() {
+      store.seriesArr = [];
+      store.loading = true;
+      const fullUrl = store.seriesUrl + this.setUpquery();
+      console.log(fullUrl);
+      axios.get(fullUrl).then((res) => {
+        store.seriesArr = res.data.results;
+        store.loading = false;
+      });
+    },
+    searchAll() {
+      this.getMovies();
+      this.getSeries();
     },
   },
   mounted() {
@@ -42,7 +59,7 @@ export default {
 </script>
 
 <template>
-  <AppHeader @searchInMovies="getMovies" />
+  <AppHeader @search="searchAll" />
   <main>
     <AppMain />
   </main>

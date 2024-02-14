@@ -18,16 +18,22 @@ export default {
       </figure>
     </div>
     <div class="card-bottom">
-      <span>{{ propsMovies.title }}</span>
-      <span>Original Title: {{ propsMovies.original_title }}</span>
-      <span>Language:{{ propsMovies.original_language }}</span>
-      <span>Vote:{{ propsMovies.vote_average }}</span>
+      <span>{{ propsMovies.title || propsMovies.name }}</span>
+      <span
+        >Original Title:
+        {{ propsMovies.original_title || propsMovies.original_name }}</span
+      >
+      <span id="lan"
+        >Language:{{ propsMovies.original_language.toUpperCase() }}
+        <img :src="store.urlFlag1 + 'US' + store.urlFlag2" />
+      </span>
+      <span>Ratings:{{ propsMovies.vote_average }}</span>
     </div>
   </div>
 </template>
 <style lang="scss" scoped>
 .card {
-  width: 15%;
+  width: 10%;
   display: flex;
   flex-direction: column;
   .card-top {
