@@ -33,7 +33,7 @@ export default {
           "
         />
       </span>
-      <span>Ratings:{{ propsMovies.vote_average }}</span>
+      <span>{{ propsMovies.vote_average }}</span>
     </div>
   </div>
 </template>

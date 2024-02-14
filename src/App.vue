@@ -12,6 +12,13 @@ export default {
   data() {
     return {
       store,
+      ratingStars: {
+        rate1: "⭐",
+        rate2: "⭐⭐",
+        rate3: "⭐⭐⭐",
+        rate4: "⭐⭐⭐⭐",
+        rate5: "⭐⭐⭐⭐⭐",
+      },
     };
   },
   methods: {
@@ -20,11 +27,26 @@ export default {
       store.movieResArr = [];
       store.seriesArr = [];
     },
+
     setLang(arr) {
       arr.forEach((item) => {
         item.original_language === "en" ? (item.original_language = "US") : 0;
         item.original_language === "ja" ? (item.original_language = "JP") : 0;
         item.original_language === "ko" ? (item.original_language = "KR") : 0;
+        item.vote_average = Math.floor(item.vote_average);
+        if (item.vote_average <= 2 && item.vote_average !== 0) {
+          item.vote_average = this.ratingStars.rate1;
+        } else if (item.vote_average > 2 && item.vote_average < 5) {
+          item.vote_average = this.ratingStars.rate2;
+        } else if (item.vote_average === 5 || item.vote_average === 6) {
+          item.vote_average = this.ratingStars.rate3;
+        } else if (item.vote_average === 7 || item.vote_average === 8) {
+          item.vote_average = this.ratingStars.rate4;
+        } else if (item.vote_average === 10 || item.vote_average === 9) {
+          item.vote_average = this.ratingStars.rate5;
+        } else {
+          item.vote_average = "No votes";
+        }
       });
     },
 
