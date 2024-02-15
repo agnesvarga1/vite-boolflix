@@ -5,9 +5,35 @@ export default {
   data() {
     return {
       store,
+      ratingStars: {
+        rate1: "⭐",
+        rate2: "⭐⭐",
+        rate3: "⭐⭐⭐",
+        rate4: "⭐⭐⭐⭐",
+        rate5: "⭐⭐⭐⭐⭐",
+      },
     };
   },
   props: ["propsMovies"],
+  methods: {
+    addStars(num) {
+      num = Math.floor(num);
+      if (num <= 2 && num !== 0) {
+        num = this.ratingStars.rate1;
+      } else if (num > 2 && num < 5) {
+        num = this.ratingStars.rate2;
+      } else if (num === 5 || num === 6) {
+        num = this.ratingStars.rate3;
+      } else if (num === 7 || num === 8) {
+        num = this.ratingStars.rate4;
+      } else if (num === 10 || num === 9) {
+        num = this.ratingStars.rate5;
+      } else {
+        num = "No votes";
+      }
+      return num;
+    },
+  },
 };
 </script>
 <template>
@@ -33,13 +59,13 @@ export default {
           "
         />
       </span>
-      <span>{{ propsMovies.vote_average }}</span>
+      <span>{{ addStars(propsMovies.vote_average) }}</span>
     </div>
   </div>
 </template>
 <style lang="scss" scoped>
 .card {
-  width: 10%;
+  width: calc(100% / 5 - 10px);
   display: flex;
   flex-direction: column;
   .card-top {

@@ -53,6 +53,7 @@ header {
       gap: 30px;
       h1 {
         color: red;
+        font-size: 2.2rem;
       }
       ul {
         display: flex;
@@ -61,7 +62,7 @@ header {
           a {
             font-size: 1.5em;
             color: #000;
-            padding: 0.5rem;
+            padding: 0.3rem;
             &:hover {
               color: red;
               border: 2px solid red;
