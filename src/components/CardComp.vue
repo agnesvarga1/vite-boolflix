@@ -37,28 +37,30 @@ export default {
 };
 </script>
 <template>
-  <div class="card">
-    <div class="card-top">
-      <figure>
-        <img :src="store.urlImg + propsMovies.poster_path" alt="" />
-      </figure>
-      <div class="card-info">
-        <h3>{{ propsMovies.title || propsMovies.name }}</h3>
-        <span
-          >Original Title:
-          {{ propsMovies.original_title || propsMovies.original_name }}</span
-        >
-        <span id="lang"
-          >Language:
-          <img
-            :src="
-              store.urlFlag1 +
-              propsMovies.original_language.toUpperCase() +
-              store.urlFlag2
-            "
-          />
-        </span>
-        <span>Rating: {{ addStars(propsMovies.vote_average) }}</span>
+  <div class="card-wrapper">
+    <div class="card">
+      <div class="card-top">
+        <figure>
+          <img :src="store.urlImg + propsMovies.poster_path" alt="" />
+        </figure>
+        <div class="card-info">
+          <h3>{{ propsMovies.title || propsMovies.name }}</h3>
+          <span
+            >Original Title:
+            {{ propsMovies.original_title || propsMovies.original_name }}</span
+          >
+          <span id="lang"
+            >Language:
+            <img
+              :src="
+                store.urlFlag1 +
+                propsMovies.original_language.toUpperCase() +
+                store.urlFlag2
+              "
+            />
+          </span>
+          <span>Rating: {{ addStars(propsMovies.vote_average) }}</span>
+        </div>
       </div>
     </div>
     <div class="card-bottom">
@@ -67,34 +69,11 @@ export default {
   </div>
 </template>
 <style lang="scss" scoped>
-.card {
-  width: calc(100% / 5 - 10px);
-  min-height: 520px;
-  display: flex;
-  flex-direction: column;
-  perspective: 1000px;
-  &:hover .card-top {
-    transform: rotateY(180deg);
-  }
-
-  .card-top {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    transition: transform 0.6s;
-    transform-style: preserve-3d;
-    figure {
-      width: 100%;
-      img {
-        width: 100%;
-      }
-    }
-  }
-
+.card-wrapper {
+  width: calc(100% / 5 - 1.1rem);
   .card-bottom {
-    padding-block: 0.4rem;
     text-align: center;
+    height: 30px;
     h3 {
       font-weight: 100;
     }
@@ -102,25 +81,49 @@ export default {
   &:hover .card-bottom {
     display: none;
   }
-  figure,
-  .card-info {
-    position: absolute;
+  .card {
     width: 100%;
-    height: 100%;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-  }
-  .card-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-    font-size: 1rem;
-    transform: rotateY(180deg);
-    #lang {
-      display: flex;
-      gap: 0.2rem;
+    aspect-ratio: 1/1.5;
+    perspective: 1000px;
+    &:hover .card-top {
+      transform: rotateY(180deg);
+    }
+
+    .card-top {
+      background-color: pink;
+      position: relative;
+      width: 100%;
+
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+      figure {
+        img {
+          width: 100%;
+        }
+      }
+      figure,
+      .card-info {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+      }
+      .card-info {
+        padding-top: 4rem;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: baseline;
+        font-size: 1rem;
+        transform: rotateY(180deg);
+
+        #lang {
+          display: flex;
+          justify-content: center;
+          gap: 0.2rem;
+        }
+      }
     }
   }
 }
