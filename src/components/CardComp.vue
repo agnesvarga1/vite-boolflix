@@ -42,33 +42,48 @@ export default {
       <figure>
         <img :src="store.urlImg + propsMovies.poster_path" alt="" />
       </figure>
+      <div class="card-info">
+        <h3>{{ propsMovies.title || propsMovies.name }}</h3>
+        <span
+          >Original Title:
+          {{ propsMovies.original_title || propsMovies.original_name }}</span
+        >
+        <span id="lang"
+          >Language:
+          <img
+            :src="
+              store.urlFlag1 +
+              propsMovies.original_language.toUpperCase() +
+              store.urlFlag2
+            "
+          />
+        </span>
+        <span>Rating: {{ addStars(propsMovies.vote_average) }}</span>
+      </div>
     </div>
     <div class="card-bottom">
-      <span>{{ propsMovies.title || propsMovies.name }}</span>
-      <span
-        >Original Title:
-        {{ propsMovies.original_title || propsMovies.original_name }}</span
-      >
-      <span id="lang"
-        >Language:
-        <img
-          :src="
-            store.urlFlag1 +
-            propsMovies.original_language.toUpperCase() +
-            store.urlFlag2
-          "
-        />
-      </span>
-      <span>{{ addStars(propsMovies.vote_average) }}</span>
+      <h3>{{ propsMovies.title || propsMovies.name }}</h3>
     </div>
   </div>
 </template>
 <style lang="scss" scoped>
 .card {
   width: calc(100% / 5 - 10px);
+  min-height: 520px;
   display: flex;
   flex-direction: column;
+  perspective: 1000px;
+  &:hover .card-top {
+    transform: rotateY(180deg);
+  }
+
   .card-top {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
     figure {
       width: 100%;
       img {
@@ -76,12 +91,33 @@ export default {
       }
     }
   }
+
   .card-bottom {
+    padding-block: 0.4rem;
+    text-align: center;
+    h3 {
+      font-weight: 100;
+    }
+  }
+  &:hover .card-bottom {
+    display: none;
+  }
+  figure,
+  .card-info {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  .card-info {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 5px;
-    font-size: 14px;
-    padding-block: 0.4rem;
+    font-size: 1rem;
+    transform: rotateY(180deg);
     #lang {
       display: flex;
       gap: 0.2rem;

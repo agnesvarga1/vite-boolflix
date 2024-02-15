@@ -35,7 +35,7 @@ export default {
 <style lang="scss" scoped>
 header {
   min-height: 80px;
-  background-color: #ffffff84;
+  background-color: #ffffff72;
   display: flex;
   align-items: center;
 
