@@ -41,7 +41,7 @@ export default {
 
     getMovies() {
       store.loading = true;
-      store.movieResArr = [];
+      //store.movieResArr = [];
       const optionsPerAxios = {
         params: {
           query: store.queryMovie,

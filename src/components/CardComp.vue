@@ -5,13 +5,13 @@ export default {
   data() {
     return {
       store,
-      ratingStars: {
-        rate1: "⭐",
-        rate2: "⭐⭐",
-        rate3: "⭐⭐⭐",
-        rate4: "⭐⭐⭐⭐",
-        rate5: "⭐⭐⭐⭐⭐",
-      },
+      // ratingStars: {
+      //   rate1: "⭐",
+      //   rate2: "⭐⭐",
+      //   rate3: "⭐⭐⭐",
+      //   rate4: "⭐⭐⭐⭐",
+      //   rate5: "⭐⭐⭐⭐⭐",
+      // },
     };
   },
   props: ["propsMovies"],
@@ -43,44 +43,73 @@ export default {
         <figure>
           <img :src="store.urlImg + propsMovies.poster_path" alt="" />
         </figure>
+        <!-- card back-face -->
         <div class="card-info">
           <h3>{{ propsMovies.title || propsMovies.name }}</h3>
           <span
             >Original Title:
             {{ propsMovies.original_title || propsMovies.original_name }}</span
           >
-          <span id="lang"
-            >Language:
-            <img
-              :src="
-                store.urlFlag1 +
-                propsMovies.original_language.toUpperCase() +
-                store.urlFlag2
-              "
-            />
-          </span>
-          <span v-if="addStars(propsMovies.vote_average) === 1"
-            >Rating:<i class="fa-solid fa-star"></i>
-          </span>
-          <span v-else-if="addStars(propsMovies.vote_average) === 2"
-            >Rating:<i class="fa-solid fa-star"></i
-            ><i class="fa-solid fa-star"></i>
-          </span>
-          <span v-else-if="addStars(propsMovies.vote_average) === 3"
-            >Rating:<i class="fa-solid fa-star"></i
-            ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-          </span>
-          <span v-else-if="addStars(propsMovies.vote_average) === 4"
-            >Rating:<i class="fa-solid fa-star"></i
-            ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
-            ><i class="fa-solid fa-star"></i>
-          </span>
-          <span v-else-if="addStars(propsMovies.vote_average) === 5"
-            >Rating:<i class="fa-solid fa-star"></i
-            ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
-            ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-          </span>
-          <span v-else>{{ addStars(propsMovies.vote_average) }}</span>
+          <div class="ratings">
+            <span id="lang"
+              >Language:
+              <img
+                :src="
+                  store.urlFlag1 +
+                  propsMovies.original_language.toUpperCase() +
+                  store.urlFlag2
+                "
+              />
+            </span>
+            <span v-if="addStars(propsMovies.vote_average) === 1"
+              >Rating:<i class="fa-solid fa-star"></i
+              ><i
+                v-for="(item, index) in 4"
+                :key="index"
+                class="fa-regular fa-star"
+              ></i>
+            </span>
+            <span v-else-if="addStars(propsMovies.vote_average) === 2"
+              >Rating:<i class="fa-solid fa-star"></i
+              ><i class="fa-solid fa-star"></i
+              ><i
+                v-for="(item, index) in 3"
+                :key="index"
+                class="fa-regular fa-star"
+              ></i>
+            </span>
+            <span v-else-if="addStars(propsMovies.vote_average) === 3"
+              >Rating:<i class="fa-solid fa-star"></i
+              ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              <i
+                v-for="(item, index) in 2"
+                :key="index"
+                class="fa-regular fa-star"
+              ></i>
+            </span>
+            <span v-else-if="addStars(propsMovies.vote_average) === 4"
+              >Rating:<i class="fa-solid fa-star"></i
+              ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+              ><i class="fa-solid fa-star"></i>
+              <i class="fa-regular fa-star"></i>
+            </span>
+            <span v-else-if="addStars(propsMovies.vote_average) === 5"
+              >Rating:<i class="fa-solid fa-star"></i
+              ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+              ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </span>
+            <span v-else
+              >Rating:
+              <i
+                v-for="(item, index) in 5"
+                :key="index"
+                class="fa-regular fa-star"
+              ></i
+            ></span>
+          </div>
+          <button @click="$emit('play')" class="btn-trailer">
+            Play trailer
+          </button>
         </div>
       </div>
     </div>
@@ -91,17 +120,32 @@ export default {
 </template>
 <style lang="scss" scoped>
 .card-wrapper {
-  width: calc(100% / 5 - 1.1rem);
+  width: calc(100% / 10 - 1.1rem);
+
   .card-bottom {
     text-align: center;
     height: 30px;
     padding-top: 0.2rem;
+    font-size: 10px;
     h3 {
       font-weight: 100;
     }
   }
   &:hover .card-bottom {
     display: none;
+  }
+
+  button {
+    margin-top: 1rem;
+    padding-block: 0.3rem;
+    background-color: rgb(144, 1, 1);
+    color: white;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 3px;
+    &:hover {
+      background-color: #6e6e6e;
+    }
   }
   .card {
     width: 100%;
