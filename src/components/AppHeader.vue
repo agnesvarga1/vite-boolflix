@@ -42,7 +42,6 @@ header {
   nav {
     width: 80%;
     margin: 0 auto;
-    padding-block: 1rem;
     opacity: 1;
     display: flex;
     justify-content: space-between;
@@ -57,15 +56,21 @@ header {
       }
       ul {
         display: flex;
+        height: 80px;
         gap: 15px;
         li {
+          height: inherit;
+
           a {
+            display: flex;
+            align-items: center;
             font-size: 1.5em;
-            color: #000;
-            padding: 0.3rem;
+            padding-inline: 0.2rem;
+            color: #fff;
+            height: inherit;
+
             &:hover {
-              color: red;
-              border: 2px solid red;
+              border-bottom: 5px solid red;
             }
           }
         }

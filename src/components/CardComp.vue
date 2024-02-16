@@ -17,21 +17,21 @@ export default {
   props: ["propsMovies"],
   methods: {
     addStars(num) {
-      num = Math.floor(num);
+      num = Math.round(num);
       if (num <= 2 && num !== 0) {
-        num = this.ratingStars.rate1;
+        return 1;
       } else if (num > 2 && num < 5) {
-        num = this.ratingStars.rate2;
+        return 2;
       } else if (num === 5 || num === 6) {
-        num = this.ratingStars.rate3;
+        return 3;
       } else if (num === 7 || num === 8) {
-        num = this.ratingStars.rate4;
+        return 4;
       } else if (num === 10 || num === 9) {
-        num = this.ratingStars.rate5;
+        return 5;
       } else {
-        num = "No votes";
+        return "No votes";
       }
-      return num;
+      // return num;
     },
   },
 };
@@ -59,7 +59,28 @@ export default {
               "
             />
           </span>
-          <span>Rating: {{ addStars(propsMovies.vote_average) }}</span>
+          <span v-if="addStars(propsMovies.vote_average) === 1"
+            >Rating:<i class="fa-solid fa-star"></i>
+          </span>
+          <span v-else-if="addStars(propsMovies.vote_average) === 2"
+            >Rating:<i class="fa-solid fa-star"></i
+            ><i class="fa-solid fa-star"></i>
+          </span>
+          <span v-else-if="addStars(propsMovies.vote_average) === 3"
+            >Rating:<i class="fa-solid fa-star"></i
+            ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </span>
+          <span v-else-if="addStars(propsMovies.vote_average) === 4"
+            >Rating:<i class="fa-solid fa-star"></i
+            ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+            ><i class="fa-solid fa-star"></i>
+          </span>
+          <span v-else-if="addStars(propsMovies.vote_average) === 5"
+            >Rating:<i class="fa-solid fa-star"></i
+            ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+            ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </span>
+          <span v-else>{{ addStars(propsMovies.vote_average) }}</span>
         </div>
       </div>
     </div>
@@ -74,6 +95,7 @@ export default {
   .card-bottom {
     text-align: center;
     height: 30px;
+    padding-top: 0.2rem;
     h3 {
       font-weight: 100;
     }
