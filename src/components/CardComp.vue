@@ -157,10 +157,8 @@ export default {
     }
 
     .card-top {
-      background-color: pink;
       position: relative;
       width: 100%;
-
       transition: transform 0.6s;
       transform-style: preserve-3d;
       figure {
@@ -192,6 +190,21 @@ export default {
         }
       }
     }
+  }
+}
+@media only screen and (max-width: 950px) {
+  .card-info,
+  .ratings,
+  button {
+    font-size: 14px;
+    padding: 0;
+    bottom: 0;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .card-wrapper {
+    width: 80%;
+    margin: 0 auto;
   }
 }
 </style>
