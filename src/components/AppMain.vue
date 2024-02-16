@@ -1,11 +1,13 @@
 <script>
 import { store } from "../store";
 import CardComp from "./CardComp.vue";
+import SpinnerComp from "./SpinnerComp.vue";
 import axios from "axios";
 export default {
   name: "AppMain",
   components: {
     CardComp,
+    SpinnerComp,
   },
   data() {
     return {
@@ -20,25 +22,20 @@ export default {
       store.video = [];
     },
     getVideoData() {
-      console.log(this.idCard);
-
       if (store.movieResArr.length !== 0) {
         this.typeCard = "movie";
       } else if (store.seriesArr.length !== 0) {
         this.typeCard = "tv";
       }
-      console.log(this.typeCard);
-      console.log(
-        `https://api.themoviedb.org/3/${this.typeCard}/${this.idCard}/videos?api_key=8655b08b460ad55dbe7c72cdc2e63fca`
-      );
+
       axios
         .get(
           `https://api.themoviedb.org/3/${this.typeCard}/${this.idCard}/videos?api_key=8655b08b460ad55dbe7c72cdc2e63fca`
         )
         .then((res) => {
           store.video = res.data.results;
-          console.log(store.video);
         });
+      console.log(store.video);
       store.video.forEach((vid) => {
         if (vid.type === "Trailer" || vid.type === "Clip") {
           store.vidPath = vid.key;
@@ -48,15 +45,11 @@ export default {
     },
     getID(id, type) {
       store.vidPath = "";
-      //store.video = [];
       this.idCard = id;
-      if (!type) {
-        this.typeCard = "";
-      } else {
+
+      if (type !== undefined) {
         this.typeCard = type;
       }
-      console.log(type);
-      this.getVideoData();
     },
   },
 };
@@ -65,6 +58,7 @@ export default {
   <div class="container">
     <h2 v-if="store.queryMovie !== ''">Films</h2>
     <h2 v-else>Trending Now</h2>
+    <SpinnerComp v-if="store.loading" />
     <div class="cards">
       <div v-show="store.vidPath !== ''" class="video-window">
         <div @click="closeModal" class="close">

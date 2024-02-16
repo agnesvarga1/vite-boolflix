@@ -120,13 +120,13 @@ export default {
 </template>
 <style lang="scss" scoped>
 .card-wrapper {
-  width: calc(100% / 10 - 1.1rem);
+  width: calc(100% / 5 - 1.1rem);
 
   .card-bottom {
     text-align: center;
     height: 30px;
     padding-top: 0.2rem;
-    font-size: 10px;
+    font-size: 12px;
     h3 {
       font-weight: 100;
     }
@@ -139,6 +139,7 @@ export default {
     margin-top: 1rem;
     padding-block: 0.3rem;
     background-color: rgb(144, 1, 1);
+    cursor: pointer;
     color: white;
     text-transform: uppercase;
     border: none;

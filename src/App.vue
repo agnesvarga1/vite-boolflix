@@ -33,9 +33,11 @@ export default {
     },
 
     trendingAll() {
+      store.loading = true;
       axios.get(store.urlAll).then((res) => {
         store.allTrending = res.data.results;
         this.setLang(store.allTrending);
+        store.loading = false;
       });
     },
 
